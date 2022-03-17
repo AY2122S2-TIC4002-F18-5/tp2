@@ -10,7 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.StorageManager;
 import seedu.address.ui.EmailWindow;
-import seedu.address.ui.JavaFXTesting;
 
 public class ExportCommand extends Command {
 
@@ -52,7 +51,6 @@ public class ExportCommand extends Command {
         }
 
         StorageManager.exportAddressBookToTxt(inforToTxt, txtStoragePath);
-        EmailWindow.emailWindow("micheal_yang@getecha.com", "michealyang1994@gmail.com");
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
