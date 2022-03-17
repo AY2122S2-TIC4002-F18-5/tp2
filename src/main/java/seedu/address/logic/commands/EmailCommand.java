@@ -1,11 +1,8 @@
 package seedu.address.logic.commands;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.ui.EmailWindow;
@@ -16,8 +13,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 public class EmailCommand extends Command  {
     public static final String COMMAND_WORD = "email";
     private final NameContainsKeywordsPredicate predicate;
-    final String fromEmail = "aaa";
-    final String toEmail = "bbb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Send email to specific"
             + " person in the contact list\n"
@@ -44,7 +39,6 @@ public class EmailCommand extends Command  {
             throw new CommandException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
 
         return new CommandResult("Email Sent");
     }
