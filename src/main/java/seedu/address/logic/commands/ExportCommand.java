@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.StorageManager;
+import seedu.address.ui.JavaFXTesting;
 
 public class ExportCommand extends Command {
 
@@ -50,6 +51,7 @@ public class ExportCommand extends Command {
         }
 
         StorageManager.exportAddressBookToTxt(inforToTxt, txtStoragePath);
+        JavaFXTesting.JavaFXTesting("aaa", "bbb");
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
