@@ -1,11 +1,19 @@
 package seedu.address.logic.commands;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.ui.EmailWindow;
+
+import static java.util.Objects.requireNonNull;
 
 public class EmailCommand extends Command  {
     public static final String COMMAND_WORD = "email";
+    private final NameContainsKeywordsPredicate predicate;
     final String fromEmail = "aaa";
     final String toEmail = "bbb";
 
@@ -14,12 +22,23 @@ public class EmailCommand extends Command  {
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " Mic";
 
-    public EmailCommand(NameContainsKeywordsPredicate predicate) {
+    private ObservableList<Person> pLst;
 
+    public EmailCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+
+        this.pLst = model.getAddressBook().getPersonList();
+
+        String toEmailAddress = pLst.get(0).getEmail().toString();
+
+        EmailWindow.emailWindow("micheal_yang@getecha.com", toEmailAddress);
+
+        return new CommandResult("Email Sent");
     }
 }
