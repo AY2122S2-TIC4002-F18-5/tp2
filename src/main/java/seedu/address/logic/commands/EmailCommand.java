@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -10,6 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.ui.EmailWindow;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class EmailCommand extends Command  {
     public static final String COMMAND_WORD = "email";
@@ -34,10 +36,15 @@ public class EmailCommand extends Command  {
         model.updateFilteredPersonList(predicate);
 
         this.pLst = model.getAddressBook().getPersonList();
+        if(pLst.size() != 0) {
+            String toEmailAddress = pLst.get(0).getEmail().toString();
 
-        String toEmailAddress = pLst.get(0).getEmail().toString();
+            EmailWindow.emailWindow("micheal_yang@getecha.com", toEmailAddress);
+        } else {
+            throw new CommandException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
-        EmailWindow.emailWindow("micheal_yang@getecha.com", toEmailAddress);
 
         return new CommandResult("Email Sent");
     }
