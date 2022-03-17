@@ -22,6 +22,7 @@ public class EmailCommand extends Command  {
     private ObservableList<Person> pLst;
 
     public EmailCommand(NameContainsKeywordsPredicate predicate) {
+
         this.predicate = predicate;
     }
 
@@ -30,16 +31,17 @@ public class EmailCommand extends Command  {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
 
-        this.pLst = model.getAddressBook().getPersonList();
-        if(pLst.size() != 0) {
+        this.pLst = model.getFilteredPersonList();
+
+        if(pLst.size() > 0) {
             String toEmailAddress = pLst.get(0).getEmail().toString();
 
             EmailWindow.emailWindow("micheal_yang@getecha.com", toEmailAddress);
+
         } else {
-            throw new CommandException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new CommandException("Person not found.");
         }
 
-        return new CommandResult("Email Sent");
+        return new CommandResult("Person Found.");
     }
 }

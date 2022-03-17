@@ -18,7 +18,7 @@ public class EmailWindow {
     final static TextArea text = new TextArea();
     static Stage window = new Stage();
 
-    public static void emailWindow(String fromEmailAddress, String toEmailAddress) {
+    public static String emailWindow(String fromEmailAddress, String toEmailAddress) {
 
         window.setTitle("Email Form Window");
         Scene scene = new Scene(new Group(), 473, 305);
@@ -30,10 +30,10 @@ public class EmailWindow {
 
         // ---------- Create From Email Address Label ---------- //
         Label fromLabel = new Label("From: ");
-        Label fromAddress = new Label("fromEmailAddress");
+        Label fromAddress = new Label(fromEmailAddress);
         // ---------- Create To Email Address Label ---------- //
         Label toLabel = new Label("To: ");
-        Label toAddress = new Label("toEmailAddress");
+        Label toAddress = new Label(toEmailAddress);
         // ---------- Create Subject Label ---------- //
         Label subjectLabel = new Label("Subject:  ");
         // ---------- Set TextArea Size ---------- //
@@ -57,6 +57,8 @@ public class EmailWindow {
         root.getChildren().add(grid);
         window.setScene(scene);
         window.show();
+
+        return "Email Sent";
     }
 
 }
