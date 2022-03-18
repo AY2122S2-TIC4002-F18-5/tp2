@@ -180,6 +180,11 @@ public class AddCommandTest {
         public boolean redoAddressBook() {
             return false;
         }
+
+        @Override
+        public void sortAddressBook() {
+
+        }
     }
 
     /**
@@ -213,6 +218,11 @@ public class AddCommandTest {
         @Override
         public boolean redoAddressBook() {
             return false;
+        }
+
+        @Override
+        public void sortAddressBook() {
+
         }
 
         @Override
