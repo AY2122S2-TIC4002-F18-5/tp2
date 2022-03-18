@@ -77,7 +77,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private abstract class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -165,6 +165,21 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+
+        }
+
+        @Override
+        public boolean undoAddressBook() {
+            return false;
+        }
+
+        @Override
+        public boolean redoAddressBook() {
+            return false;
+        }
     }
 
     /**
@@ -183,6 +198,21 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+
+        }
+
+        @Override
+        public boolean undoAddressBook() {
+            return false;
+        }
+
+        @Override
+        public boolean redoAddressBook() {
+            return false;
         }
 
         @Override
